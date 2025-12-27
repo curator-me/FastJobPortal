@@ -1,0 +1,48 @@
+/* Icon List scroll */
+.icon-list-wrapper {
+  margin-bottom: 10px;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 90%, transparent);
+}
+
+.icon-list-wrapper .scrolling-list {
+  display: flex;
+}
+
+.icon-group {
+  display: flex;
+}
+
+.icon-list-wrapper .icon {
+  flex: 0 0 auto;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--gray-100, #f2f2f2);
+  color: var(--gray-800, #2a7999);
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+/* .scrolling-list {             
+  animation: scroll-left 100s linear infinite; 
+}
+
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.icon-list-wrapper:hover .scrolling-list {
+  animation-play-state: paused;
+} */

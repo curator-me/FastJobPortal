@@ -1,0 +1,82 @@
+.testimonial {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+
+.testimonial .container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* width: 96%;
+  max-width: 1250px;
+  margin: 0 auto; */
+  padding: 0 20px;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.testimonial .title h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  color: var(--color-c);
+}
+
+.testimonial .comment-wrapper-scrolling {
+  display: flex;
+  width: max-content;
+  margin: 10px 0;
+}
+
+.testimonial .comment-wrapper-scrolling:hover {
+  animation-play-state: paused;
+}
+
+.testimonial .comment-wrapper {
+  display: flex;
+  padding-bottom: 20px;
+  /* flex-shrink: 0; */
+}
+
+.testimonial .comment-card {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  min-width: 400px;
+  max-width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 30px;
+}
+
+.testimonial .comment-card .comment {
+  font-style: italic;
+  color: #526a6f;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.testimonial .profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.testimonial .profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial .info .username {
+  font-weight: bold;
+  color: #20463f;
+}
+
+.testimonial .info .username-link {
+  color: #718289;
+  font-size: 0.9rem;
+}

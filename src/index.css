@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    caret-color: blanchedalmond;
+}
+
+input {
+  outline: none;
+}
+button, a {
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
