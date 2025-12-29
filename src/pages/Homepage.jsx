@@ -5,7 +5,7 @@ import { Testimonial } from "../components/HomePage/Testimonial/Testimonial";
 import { Footer } from "../layout/Footer";
 import "./HomePage.css"
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <>
       <Hero />

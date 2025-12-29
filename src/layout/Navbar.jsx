@@ -1,37 +1,52 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 export function Navbar() {
   const [ispos, setIspos] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop >= 400) {
-        setIspos(true);
-      } else {
-        setIspos(false);
-      }
+      setIspos(window.scrollY >= 400);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <section
       className="navbar"
       style={{
         position: ispos ? "fixed" : "absolute",
-        backgroundColor: !ispos ? "#0000001e" : "#3f7d95e3",
+        backgroundColor: ispos ? "#3f7d95e3" : "#0000001e",
       }}
     >
       <div className="container">
         <div className="nav-links">
-          <a className="link">Home</a>
-          <a className="link">Brows Jobs</a>
-          <a className="link">Post A Job</a>
-          <a className="link">Companies</a>
-          <a className="link">Pricing</a>
-          <a className="link">Sign In</a>
+          <NavLink to="/" className="link" end>
+            Home
+          </NavLink>
+
+          <NavLink to="/jobs" className="link">
+            Browse Jobs
+          </NavLink>
+
+          <NavLink to="/post-job" className="link">
+            Post A Job
+          </NavLink>
+
+          <NavLink to="/companies" className="link">
+            Companies
+          </NavLink>
+
+          <NavLink to="/pricing" className="link">
+            Pricing
+          </NavLink>
+
+          <NavLink to="/signin" className="link">
+            Sign In
+          </NavLink>
         </div>
       </div>
     </section>
