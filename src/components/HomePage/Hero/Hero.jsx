@@ -15,7 +15,7 @@ export function Hero() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      console.log(scrollTop);
+      // console.log(scrollTop);
 
       // Opacity: fade out between 200px and 400px
       const newOpacity = Math.max(0, 1 - Math.max(scrollTop - 200, 0) / 200);
