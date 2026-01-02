@@ -1,5 +1,10 @@
 import "./index.css";
-import { keywords } from "../../data/jobLists";
+import {
+  keywords,
+  experiences,
+  Employment,
+  Environment,
+} from "../../data/jobLists";
 import { FaAngleDown } from "react-icons/fa6";
 import { useState } from "react";
 import { motion } from "motion/react";
@@ -18,11 +23,52 @@ function DropdownIcon({ isOpen }) {
   );
 }
 
-export function Sidebar() {
+const handleTagToggle = (keyword, setFilterOptions) => {
+  setFilterOptions((prev) => ({
+    ...prev,
+    tags: prev.tags.includes(keyword)
+      ? prev.tags.filter((tag) => tag !== keyword) // remove
+      : [...prev.tags, keyword], // add
+  }));
+};
+const handleExperienceToggle = (experience, setFilterOptions) => {
+  setFilterOptions((prev) => ({
+    ...prev,
+    experience: prev.experience.includes(experience)
+      ? prev.experience.filter((exp) => exp !== experience) // remove
+      : [...prev.experience, experience], // add
+  }));
+};
+const handleEmploymentToggle = (employment, setFilterOptions) => {
+  setFilterOptions((prev) => ({
+    ...prev,
+    employmentType: prev.employmentType.includes(employment)
+      ? prev.employmentType.filter((emp) => emp !== employment) // remove
+      : [...prev.employmentType, employment], // add
+  }));
+};
+const handleEnvironmentToggle = (environment, setFilterOptions) => {
+  setFilterOptions((prev) => ({
+    ...prev,
+    environment: prev.environment.includes(environment)
+      ? prev.environment.filter((env) => env !== environment) // remove
+      : [...prev.environment, environment], // add
+  }));
+};
+
+export function Sidebar({ handleFilterJobs }) {
   const optionsCount = 5;
   const [showOptions, setShowOptions] = useState(
     Array(optionsCount).fill(true)
   );
+  const [filterOptions, setFilterOptions] = useState({
+    location: "",
+    experience: [],
+    tags: [],
+    employmentType: [],
+    environment: [],
+    salaryRange: { min: 0, max: Infinity },
+  });
   return (
     <aside className="sidebar">
       <h3 className="filter-section-title">Filter Jobs</h3>
@@ -34,6 +80,10 @@ export function Sidebar() {
           type="text"
           placeholder="Enter location"
           className="filter-input"
+          value={filterOptions.location}
+          onChange={(e) =>
+            setFilterOptions({ ...filterOptions, location: e.target.value })
+          }
         />
       </div>
 
@@ -50,18 +100,18 @@ export function Sidebar() {
           <DropdownIcon isOpen={showOptions[0]} />
         </h4>
         <div className={showOptions[0] ? "show-options" : "show-options close"}>
-          <label>
-            <input type="checkbox" />{" "}
-            <span className="checkbox-label">Fresher</span>
-          </label>
-          <label>
-            <input type="checkbox" />{" "}
-            <span className="checkbox-label">1 - 3 Years</span>
-          </label>
-          <label>
-            <input type="checkbox" />{" "}
-            <span className="checkbox-label">5+ Years</span>
-          </label>
+          {experiences.map((experience, index) => (
+            <label key={index}>
+              <input
+                type="checkbox"
+                checked={filterOptions.experience.includes(experience)}
+                onChange={() =>
+                  handleExperienceToggle(experience, setFilterOptions)
+                }
+              />{" "}
+              <span className="checkbox-label">{experience}</span>
+            </label>
+          ))}
         </div>
       </div>
 
@@ -79,7 +129,11 @@ export function Sidebar() {
         <div className={showOptions[1] ? "show-options" : "show-options close"}>
           {keywords.map((keyword, index) => (
             <label key={index}>
-              <input type="checkbox" />{" "}
+              <input
+                type="checkbox"
+                checked={filterOptions.tags.includes(keyword)}
+                onChange={() => handleTagToggle(keyword, setFilterOptions)}
+              />{" "}
               <span className="checkbox-label">{keyword}</span>
             </label>
           ))}
@@ -100,17 +154,20 @@ export function Sidebar() {
         </h4>
 
         <div className={showOptions[2] ? "show-options" : "show-options close"}>
-          <label>
-            <input type="checkbox" />{" "}
-            <span className="checkbox-label">Full Time</span>
-          </label>
-          <label>
-            <input type="checkbox" />{" "}
-            <span className="checkbox-label">Part Time</span>
-          </label>
+          {Employment.map((type, index) => (
+            <label key={index}>
+              <input
+                type="checkbox"
+                checked={filterOptions.employmentType.includes(type)}
+                onChange={() => handleEmploymentToggle(type, setFilterOptions)}
+              />{" "}
+              <span className="checkbox-label">{type}</span>
+            </label>
+          ))}
         </div>
       </div>
-      {/* Employment Type */}
+
+      {/* Environment mode */}
       <div className="filter-section">
         <h4
           onClick={() => {
@@ -123,18 +180,16 @@ export function Sidebar() {
           <DropdownIcon isOpen={showOptions[3]} />
         </h4>
         <div className={showOptions[3] ? "show-options" : "show-options close"}>
-          <label>
-            <input type="checkbox" />{" "}
-            <span className="checkbox-label">Onsite</span>
-          </label>
-          <label>
-            <input type="checkbox" />{" "}
-            <span className="checkbox-label">Online</span>
-          </label>
-          <label>
-            <input type="checkbox" />{" "}
-            <span className="checkbox-label">Hybrid</span>
-          </label>
+          {Environment.map((mode, index) => (
+            <label key={index}>
+              <input
+                type="checkbox"
+                checked={filterOptions.environment.includes(mode)}
+                onChange={() => handleEnvironmentToggle(mode, setFilterOptions)}
+              />{" "}
+              <span className="checkbox-label">{mode}</span>
+            </label>
+          ))}
         </div>
       </div>
 
@@ -142,12 +197,43 @@ export function Sidebar() {
       <div className="filter-section">
         <h4>Salary Range</h4>
         <div className="salary-range">
-          <input type="number" placeholder="Min" />
-          <input type="number" placeholder="Max" />
+          <input
+            type="number"
+            placeholder="Min"
+            value={filterOptions.salaryRange.min}
+            onChange={(e) =>
+              setFilterOptions({
+                ...filterOptions,
+                salaryRange: {
+                  ...filterOptions.salaryRange,
+                  min: e.target.value,
+                },
+              })
+            }
+          />
+          <input
+            type="number"
+            placeholder="Max"
+            value={filterOptions.salaryRange.max}
+            onChange={(e) =>
+              setFilterOptions({
+                ...filterOptions,
+                salaryRange: {
+                  ...filterOptions.salaryRange,
+                  max: e.target.value,
+                },
+              })
+            }
+          />
         </div>
       </div>
 
-      <button className="apply-filters-btn">Apply Filters</button>
+      <button
+        className="apply-filters-btn"
+        onClick={() => handleFilterJobs(filterOptions)}
+      >
+        Apply Filters
+      </button>
     </aside>
   );
 }

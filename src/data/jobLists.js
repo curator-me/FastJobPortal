@@ -188,3 +188,21 @@ export const keywords = [
   "Welder",
   "Work from home",
 ];
+
+
+export const experiences = [
+  "Fresher",
+  "1 - 3 Years",
+  "5+ Years",
+];
+
+export const Employment = [
+  "Full Time",
+  "Part Time",
+];
+
+export const Environment = [
+  "Onsite",
+  "Online",
+  "Hybrid",
+]
