@@ -25,7 +25,7 @@
 }
 
 .browse-job .sidebar .filter-section {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   display: flex;
   flex-direction: column;
 }
@@ -35,6 +35,28 @@
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-a);
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.browse-job .sidebar .filter-section .show-options {
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  transition: 0.25s;
+  transition-timing-function: ease-out;
+}
+
+.browse-job .sidebar .filter-section .show-options.close {
+  max-height: 0;
+  overflow: hidden;
+  margin-bottom: 0;
+  transition-timing-function: ease-in;
+  transition: 0.2s;
 }
 
 .browse-job .sidebar .filter-input {
@@ -63,6 +85,7 @@
   cursor: pointer;
   color: white;
   transition: 0.2s ease;
+  margin-top: 20px;
 }
 
 .browse-job .sidebar .apply-filters-btn:hover {
