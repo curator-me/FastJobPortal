@@ -1,4 +1,5 @@
-import { CiLocationOn } from "react-icons/ci";
+import { MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function MainContent({ jobs = [] }) {
   return (
@@ -44,12 +45,13 @@ export function MainContent({ jobs = [] }) {
 
               {/* Job Location */}
               {/* {job.workMode !== "Remote" && ( */}
-                <div className="job-location-section">
-                  <span className="location-icon">
-                    <CiLocationOn />
-                  </span>
-                  <span className="location-text">{job.location}</span>
-                </div>
+              <div className="job-location-section">
+                <span className="location-icon">
+                  {/* <CiLocationOn /> */}
+                  <MapPin />
+                </span>
+                <span className="location-text">{job.location}</span>
+              </div>
               {/* )} */}
 
               {/* Job Metadata */}
@@ -102,10 +104,12 @@ export function MainContent({ jobs = [] }) {
                     <span className="deadline-label">Apply by:</span>
                     <span className="deadline-date">{job.deadline}</span>
                   </span>
-                  <button className="apply-btn">
-                    Apply Now
-                    <span className="apply-arrow">→</span>
-                  </button>
+                  <Link to={`/jobs/${job.id}`}>
+                    <button className="apply-btn">
+                      Apply Now
+                      <span className="apply-arrow">→</span>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

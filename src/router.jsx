@@ -5,6 +5,7 @@ import BrowseJob from "./pages/BrowseJob";
 // import Companies from "./pages/Companies";
 // import Pricing from "./pages/Pricing";
 // import SignIn from "./pages/SignIn";
+import { JobDetailsPage } from "./pages/JobDetailsPage";
 import AppLayout from "./layout/AppLayout";
 
 export const router = createBrowserRouter([
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
       //   { path: "/companies", element: <Companies /> },
       //   { path: "/pricing", element: <Pricing /> },
       //   { path: "/signin", element: <SignIn /> },
+      { path: "/jobs/:id", element: <JobDetailsPage /> },
     ],
   },
 ]);
