@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 export function Navbar() {
   const [ispos, setIspos] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,8 +20,12 @@ export function Navbar() {
     <section
       className="navbar"
       style={{
-        position: ispos ? "fixed" : "absolute",
-        backgroundColor: ispos ? "#3f7d95e3" : "#0000001e",
+        position: ispos ? "fixed" : isHomePage ? "absolute" : "fixed",
+        backgroundColor: ispos
+          ? "#3f7d95e3"
+          : isHomePage
+          ? "#0000001e"
+          : "#3f7d95e3",
       }}
     >
       <div className="container">
