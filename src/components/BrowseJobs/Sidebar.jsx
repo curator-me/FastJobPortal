@@ -1,13 +1,21 @@
+import { useState } from "react";
+import { motion } from "motion/react";
+import { FaAngleDown } from "react-icons/fa6";
 import "./index.css";
+import {
+  handleTagToggle,
+  handleExperienceToggle,
+  handleEmploymentToggle,
+  handleEnvironmentToggle,
+} from "../../api/BrowseJobs";
+
+// Mock data replace with actual data source
 import {
   keywords,
   experiences,
   Employment,
   Environment,
 } from "../../data/jobLists";
-import { FaAngleDown } from "react-icons/fa6";
-import { useState } from "react";
-import { motion } from "motion/react";
 
 function DropdownIcon({ isOpen }) {
   return (
@@ -22,39 +30,6 @@ function DropdownIcon({ isOpen }) {
     </motion.div>
   );
 }
-
-const handleTagToggle = (keyword, setFilterOptions) => {
-  setFilterOptions((prev) => ({
-    ...prev,
-    tags: prev.tags.includes(keyword)
-      ? prev.tags.filter((tag) => tag !== keyword) // remove
-      : [...prev.tags, keyword], // add
-  }));
-};
-const handleExperienceToggle = (experience, setFilterOptions) => {
-  setFilterOptions((prev) => ({
-    ...prev,
-    experience: prev.experience.includes(experience)
-      ? prev.experience.filter((exp) => exp !== experience) // remove
-      : [...prev.experience, experience], // add
-  }));
-};
-const handleEmploymentToggle = (employment, setFilterOptions) => {
-  setFilterOptions((prev) => ({
-    ...prev,
-    employmentType: prev.employmentType.includes(employment)
-      ? prev.employmentType.filter((emp) => emp !== employment) // remove
-      : [...prev.employmentType, employment], // add
-  }));
-};
-const handleEnvironmentToggle = (environment, setFilterOptions) => {
-  setFilterOptions((prev) => ({
-    ...prev,
-    environment: prev.environment.includes(environment)
-      ? prev.environment.filter((env) => env !== environment) // remove
-      : [...prev.environment, environment], // add
-  }));
-};
 
 export function Sidebar({ handleFilterJobs }) {
   const optionsCount = 5;
