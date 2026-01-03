@@ -20,7 +20,8 @@ import {
 } from "lucide-react";
 
 // Mock data - in real app, you'd fetch this from API
-import { jobCards } from '../../data/jobLists';
+import { jobCards } from "../../data/jobLists";
+import logo from "../../data/img/company-logo.png";
 const MOCK_JOBS = jobCards;
 
 export function JobDetails() {
@@ -115,7 +116,7 @@ export function JobDetails() {
           <div className="job-header-section">
             <div className="company-header">
               <div className="company-logo">
-                <img src={job.companyLogo} alt={job.company} />
+                <img src={logo} alt={job.company} />
               </div>
               <div className="company-info">
                 <h1 className="job-title">{job.position}</h1>
