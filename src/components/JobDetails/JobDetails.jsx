@@ -88,30 +88,29 @@ export function JobDetails() {
 
   return (
     <div className="job-details-page">
-      {/* Navigation Header */}
-      <nav className="job-details-nav">
-        <button onClick={() => navigate("/jobs")} className="nav-back-btn">
-          <ArrowLeft size={20} />
-          Back to Jobs
-        </button>
-        <div className="nav-actions">
-          <button onClick={handleShare} className="nav-action-btn">
-            <Share2 size={18} />
-            Share
-          </button>
-          <button
-            onClick={handleSave}
-            className={`nav-action-btn ${saved ? "saved" : ""}`}
-          >
-            <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
-            {saved ? "Saved" : "Save"}
-          </button>
-        </div>
-      </nav>
-
       <div className="job-details-container">
         {/* Main Content */}
         <div className="job-details-main">
+          {/* Navigation Header */}
+          <nav className="job-details-nav">
+            <button onClick={() => navigate("/jobs")} className="nav-back-btn">
+              <ArrowLeft size={20} />
+              Back to Jobs
+            </button>
+            <div className="nav-actions">
+              <button onClick={handleShare} className="nav-action-btn">
+                <Share2 size={18} />
+                Share
+              </button>
+              <button
+                onClick={handleSave}
+                className={`nav-action-btn ${saved ? "saved" : ""}`}
+              >
+                <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
+                {saved ? "Saved" : "Save"}
+              </button>
+            </div>
+          </nav>
           {/* Job Header */}
           <div className="job-header-section">
             <div className="company-header">

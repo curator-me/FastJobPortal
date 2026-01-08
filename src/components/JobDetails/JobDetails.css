@@ -111,7 +111,7 @@
 .job-details-page .nav-action-btn.saved {
   background: #dbeafe;
   border-color: #bfdbfe;
-  color: #1d4ed8;
+  color: var(--color-a);
 }
 
 /* Main Container */
@@ -201,13 +201,13 @@
 
 .job-details-page .work-mode-badge {
   background: #f0f9ff;
-  color: #0369a1;
+  color: var(--color-c);
   border: 1px solid #bae6fd;
 }
 
 .job-details-page .work-mode-badge.remote {
   background: #dbeafe;
-  color: #1d4ed8;
+  color: var(--color-d);
   border-color: #bfdbfe;
 }
 
@@ -422,7 +422,7 @@
 }
 
 .job-details-page .benefit-card svg {
-  color: #3b82f6;
+  color: var(--color-a);
 }
 
 /* Job Info Sidebar */
