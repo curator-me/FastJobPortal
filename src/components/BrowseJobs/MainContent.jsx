@@ -47,6 +47,9 @@ export function MainContent({ jobs = [] }) {
                   </div>
                   <div className="job-actions">
                     <button className="save-btn" aria-label="Save job">
+                      <span className="save-icon">Share</span>
+                    </button>
+                    <button className="save-btn" aria-label="Save job">
                       <span className="save-icon">Save</span>
                     </button>
                   </div>
