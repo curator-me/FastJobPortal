@@ -20,7 +20,8 @@ import {
 } from "lucide-react";
 
 // Mock data - in real app, you'd fetch this from API
-import { jobCards } from '../../data/jobLists';
+import { jobCards } from "../../data/jobLists";
+import logo from "../../data/img/company-logo.png";
 const MOCK_JOBS = jobCards;
 
 export function JobDetails() {
@@ -87,35 +88,34 @@ export function JobDetails() {
 
   return (
     <div className="job-details-page">
-      {/* Navigation Header */}
-      <nav className="job-details-nav">
-        <button onClick={() => navigate("/jobs")} className="nav-back-btn">
-          <ArrowLeft size={20} />
-          Back to Jobs
-        </button>
-        <div className="nav-actions">
-          <button onClick={handleShare} className="nav-action-btn">
-            <Share2 size={18} />
-            Share
-          </button>
-          <button
-            onClick={handleSave}
-            className={`nav-action-btn ${saved ? "saved" : ""}`}
-          >
-            <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
-            {saved ? "Saved" : "Save"}
-          </button>
-        </div>
-      </nav>
-
       <div className="job-details-container">
         {/* Main Content */}
         <div className="job-details-main">
+          {/* Navigation Header */}
+          <nav className="job-details-nav">
+            <button onClick={() => navigate("/jobs")} className="nav-back-btn">
+              <ArrowLeft size={20} />
+              Back to Jobs
+            </button>
+            <div className="nav-actions">
+              <button onClick={handleShare} className="nav-action-btn">
+                <Share2 size={18} />
+                Share
+              </button>
+              <button
+                onClick={handleSave}
+                className={`nav-action-btn ${saved ? "saved" : ""}`}
+              >
+                <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
+                {saved ? "Saved" : "Save"}
+              </button>
+            </div>
+          </nav>
           {/* Job Header */}
           <div className="job-header-section">
             <div className="company-header">
               <div className="company-logo">
-                <img src={job.companyLogo} alt={job.company} />
+                <img src={logo} alt={job.company} />
               </div>
               <div className="company-info">
                 <h1 className="job-title">{job.position}</h1>
