@@ -2,8 +2,22 @@ import "./index.css";
 import { useState } from "react";
 import { keywords } from "../../data/jobLists";
 
+function Tag({ text, jobForm, setJobForm }) {
+  return (
+    <span className="tag">
+      {text}
+      <button className="tag-close" onClick={() => {
+        const updatedTags = jobForm.tags.filter((tag) => tag !== text);
+        setJobForm({ ...jobForm, tags: updatedTags });
+      }}>
+        ×
+      </button>
+    </span>
+  );
+}
+
 export function PostJob() {
-  const [job, setJob] = useState({
+  const [jobForm, setJobForm] = useState({
     position: "",
     shortTitle: "",
     company: "",
@@ -22,24 +36,28 @@ export function PostJob() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setJob({ ...job, [name]: value });
+    setJobForm({ ...jobForm, [name]: value });
   };
 
   const handleTagChange = (e) => {
-    const { value } = e.target;
-    setJob({ ...job, tags: value });
+    const selectedTag = e.target.value;
+    if (jobForm.tags.includes(selectedTag)) return;
+    setJobForm({
+      ...jobForm,
+      tags: [...jobForm.tags, selectedTag],
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formattedJob = {
-      ...job,
-      minExperience: Number(job.minExperience),
-      minSalary: Number(job.minSalary),
-      tags: job.tags.split(",").map((t) => t.trim()),
-      benefits: job.benefits.split(",").map((b) => b.trim()),
-      requirements: job.requirements.split(",").map((r) => r.trim()),
+      ...jobForm,
+      minExperience: Number(jobForm.minExperience),
+      minSalary: Number(jobForm.minSalary),
+      tags: jobForm.tags,
+      benefits: jobForm.benefits.split(",").map((b) => b.trim()),
+      requirements: jobForm.requirements.split(",").map((r) => r.trim()),
       createdAt: new Date().toISOString(),
       editedAt: new Date().toISOString(),
     };
@@ -49,7 +67,7 @@ export function PostJob() {
   };
 
   return (
-    <div className="post-job-container">
+    <div className="post-job">
       <h1 className="post-job-title">Post a New Job</h1>
 
       <form onSubmit={handleSubmit} className="job-form">
@@ -150,17 +168,34 @@ export function PostJob() {
           />
         </div>
 
-        {/* Tags */}
+        {/* Selected Tags */}
+        <div className="tag-container">
+          {jobForm.tags.length > 0 &&
+            jobForm.tags.map((tag, index) => (
+              <Tag
+                key={index}
+                text={tag}
+                jobForm={jobForm}
+                setJobForm={setJobForm}
+              />
+            ))}
+        </div>
+
         <select
-          type="text"
           name="tags"
-          placeholder="Tags (comma separated)"
           className="input-field"
           onChange={handleTagChange}
+          value=""
         >
-            {keywords.map((keyword) => (
-              <option key={keyword} value={keyword}>{keyword}</option>
-            ))}
+          <option value="" disabled>
+            Select a tag
+          </option>
+
+          {keywords.map((keyword) => (
+            <option key={keyword} value={keyword}>
+              {keyword}
+            </option>
+          ))}
         </select>
 
         {/* Description */}
