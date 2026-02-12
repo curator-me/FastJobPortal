@@ -529,3 +529,36 @@
   background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
   background-size: 800px 104px;
 }
+
+/* Load More Button Styles */
+.browse-job .main-content .load-more-container {
+  display: flex;
+  justify-content: center;
+  padding: 32px 0;
+  margin-top: 16px;
+}
+
+.browse-job .main-content .load-more-btn {
+  background: white;
+  color: var(--color-a);
+  border: 2px solid var(--color-a);
+  padding: 12px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.browse-job .main-content .load-more-btn:hover {
+  background: var(--color-a);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.browse-job .main-content .load-more-btn:active {
+  transform: translateY(0);
+}
+

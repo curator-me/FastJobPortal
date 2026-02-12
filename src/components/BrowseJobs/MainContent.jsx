@@ -10,9 +10,8 @@ export function MainContent({ jobs = [] }) {
         <p className="content-subtitle">
           {jobs.length === 0
             ? "No positions currently available"
-            : `Showing ${jobs.length} ${
-                jobs.length === 1 ? "position" : "positions"
-              }`}
+            : `Showing ${jobs.length} ${jobs.length === 1 ? "position" : "positions"
+            }`}
         </p>
       </div>
 
@@ -34,7 +33,7 @@ export function MainContent({ jobs = [] }) {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: job.id * 0.1 }}
-              viewport={{once: true}}
+              viewport={{ once: true }}
             >
               <div className="job-card">
                 {/* Job Header with Status Badge */}
@@ -127,6 +126,11 @@ export function MainContent({ jobs = [] }) {
               </div>
             </motion.div>
           ))}
+          <div className="load-more-container">
+            <button className="load-more-btn">
+              Load More Positions
+            </button>
+          </div>
         </div>
       )}
     </main>
