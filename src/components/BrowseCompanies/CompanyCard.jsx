@@ -9,10 +9,7 @@ import {
   Users,
 } from "lucide-react";
 
-// const IMAGEKIT_KEY = import.meta.env.REACT_APP_IMAGEKIT_KEY;
 const IMAGEKIT_URL = import.meta.env.VITE_IMAGEKIT_URL;
-
-
 
 export function CompanyCard({ company }) {
   // Get company rating stars
