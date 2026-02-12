@@ -9,6 +9,8 @@ import {
   handleEnvironmentToggle,
 } from "../../api/BrowseJobs";
 
+import { getFadeInProps } from "../../animation/whileInViewPort";
+
 // Mock data replace with actual data source
 import {
   keywords,
@@ -76,7 +78,7 @@ export function Sidebar({ handleFilterJobs }) {
         </h4>
         <div className={showOptions[0] ? "show-options" : "show-options close"}>
           {experiences.map((experience, index) => (
-            <label key={index}>
+            <motion.label key={index} {...getFadeInProps(index)}>
               <input
                 type="checkbox"
                 checked={filterOptions.experience.includes(experience)}
@@ -85,7 +87,7 @@ export function Sidebar({ handleFilterJobs }) {
                 }
               />{" "}
               <span className="checkbox-label">{experience}</span>
-            </label>
+            </motion.label>
           ))}
         </div>
       </div>
@@ -103,14 +105,14 @@ export function Sidebar({ handleFilterJobs }) {
         </h4>
         <div className={showOptions[1] ? "show-options" : "show-options close"}>
           {keywords.map((keyword, index) => (
-            <label key={index}>
+            <motion.label key={index} {...getFadeInProps(index)}>
               <input
                 type="checkbox"
                 checked={filterOptions.tags.includes(keyword)}
                 onChange={() => handleTagToggle(keyword, setFilterOptions)}
               />{" "}
               <span className="checkbox-label">{keyword}</span>
-            </label>
+            </motion.label>
           ))}
         </div>
       </div>

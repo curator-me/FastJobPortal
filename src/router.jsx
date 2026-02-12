@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/Homepage";
 import BrowseJob from "./pages/BrowseJob";
 import PostJobPage from "./pages/PostjobPage";
-// import Companies from "./pages/Companies";
+import BrowseCompaniesPage from "./pages/BrowseCompaniesPage";
 // import Pricing from "./pages/Pricing";
 // import SignIn from "./pages/SignIn";
 import { JobDetailsPage } from "./pages/JobDetailsPage";
@@ -15,8 +15,8 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/jobs", element: <BrowseJob /> },
-        { path: "/post-job", element: <PostJobPage /> },
-      //   { path: "/companies", element: <Companies /> },
+      { path: "/post-job", element: <PostJobPage /> },
+      { path: "/companies", element: <BrowseCompaniesPage /> },
       //   { path: "/pricing", element: <Pricing /> },
       //   { path: "/signin", element: <SignIn /> },
       { path: "/jobs/:id", element: <JobDetailsPage /> },
