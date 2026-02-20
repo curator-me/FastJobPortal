@@ -22,7 +22,7 @@
 }
 
 .text-gradient {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, #10b981 100%);
+    background: linear-gradient(135deg, var(--color-d) 0%, var(--color-b) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -55,13 +55,13 @@
 }
 
 .pricing-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px) scale(1.01);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-    border-color: var(--primary-blue);
+    border-color: var(--color-d);
 }
 
 .pricing-card.highlighted {
-    border-color: var(--primary-blue);
+    border-color: var(--color-d);
     border-width: 2px;
     box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1), 0 10px 10px -5px rgba(37, 99, 235, 0.04);
 }
@@ -71,7 +71,7 @@
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--primary-blue);
+    background: var(--color-d);
     color: white;
     padding: 6px 16px;
     border-radius: 20px;
@@ -95,7 +95,7 @@
 }
 
 .plan-icon {
-    color: var(--primary-blue);
+    color: var(--color-d);
 }
 
 .plan-icon-gold {
@@ -173,25 +173,25 @@
 }
 
 .pricing-button.primary {
-    background: var(--primary-blue);
+    background: var(--color-c);
     color: white;
 }
 
 .pricing-button.primary:hover {
-    background: var(--primary-dark);
+    background: var(--color-d);
     transform: scale(1.02);
 }
 
 .pricing-button.secondary {
     background: white;
-    color: #1e293b;
+    color: var(--color-a);
     border: 1px solid #e2e8f0;
 }
 
 .pricing-button.secondary:hover {
     background: #f8fafc;
-    border-color: var(--primary-blue);
-    color: var(--primary-blue);
+    border-color: var(--color-d);
+    color: var(--color-d);
 }
 
 .faq-section {
