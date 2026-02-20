@@ -20,12 +20,12 @@ export function Navbar() {
     <section
       className="navbar"
       style={{
-        position: ispos ? "fixed" : isHomePage ? "absolute" : "fixed",
+        position: ispos ? "fixed" : "absolute",
         backgroundColor: ispos
           ? "#3f7d95e3"
           : isHomePage
           ? "#0000001e"
-          : "#3f7d95e3",
+          : "#3b96bad1",
       }}
     >
       <div className="container">
