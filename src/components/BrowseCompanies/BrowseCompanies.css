@@ -6,7 +6,7 @@
 
 /* Hero Section */
 .companies-hero {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(135deg, #57a7d5 0%, #1da6d8 100%);
   color: white;
   padding: 80px 40px;
   text-align: center;
@@ -43,7 +43,7 @@
 }
 
 .highlight {
-  background: linear-gradient(135deg, #48b8e4 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #52ceff 0%, #25d7eb 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -127,7 +127,7 @@
 
 .search-input:focus {
   outline: none;
-  border-color: var(--primary-blue);
+  border-color: var(--color-d);
   box-shadow: 0 15px 40px rgba(37, 99, 235, 0.15);
 }
 
@@ -188,7 +188,7 @@
   }
 }
 
-/* Company Card */
+/**** Company Card ****/
 .company-card {
   background: white;
   border-radius: 20px;
@@ -216,7 +216,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(135deg, var(--color-d) 0%, var(--color-b) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -298,7 +298,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--primary-blue);
+  color: var(--color-b);
   font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
@@ -418,7 +418,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(135deg, var(--color-b) 0%, var(--color-a) 100%);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -459,7 +459,7 @@
 
 /* CTA Section */
 .companies-cta {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  background: linear-gradient(135deg, var(--color-d) 0%, var(--color-b) 100%);
   color: white;
   padding: 60px 40px;
   border-radius: 40px 40px 0 0;
