@@ -86,6 +86,14 @@ export function BrowseCompanies() {
         )}
       </div>
 
+      {filteredCompanies.length > 0 && (
+        <div className="more-companies-container">
+          <button className="more-companies-btn">
+            More Companies
+          </button>
+        </div>
+      )}
+
       {/* CTA Section */}
       <div className="companies-cta">
         <div className="cta-content">
