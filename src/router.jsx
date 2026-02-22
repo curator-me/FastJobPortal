@@ -4,9 +4,18 @@ import BrowseJob from "./pages/BrowseJob";
 import PostJobPage from "./pages/PostjobPage";
 import BrowseCompaniesPage from "./pages/BrowseCompaniesPage";
 import PricingPage from "./pages/PricingPage";
-// import SignIn from "./pages/SignIn";
+import SigningPage from "./pages/SigningPage";
+import Dashboard from "./pages/Dashboard";
 import { JobDetailsPage } from "./pages/JobDetailsPage";
 import AppLayout from "./layout/AppLayout";
+import {
+  About,
+  SavedJobs,
+  AppliedJobs,
+  PostedJobs,
+  ResetPassword,
+  Statistics
+} from "./components/Dashboard/DashboardSections";
 
 export const router = createBrowserRouter([
   {
@@ -18,8 +27,20 @@ export const router = createBrowserRouter([
       { path: "/post-job", element: <PostJobPage /> },
       { path: "/companies", element: <BrowseCompaniesPage /> },
       { path: "/pricing", element: <PricingPage /> },
-      //   { path: "/signin", element: <SignIn /> },
+      { path: "/signin", element: <SigningPage /> },
       { path: "/jobs/:id", element: <JobDetailsPage /> },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+        children: [
+          { path: "about", element: <About /> },
+          { path: "saved-jobs", element: <SavedJobs /> },
+          { path: "applied-jobs", element: <AppliedJobs /> },
+          { path: "posted-jobs", element: <PostedJobs /> },
+          { path: "reset-password", element: <ResetPassword /> },
+          { path: "statistics", element: <Statistics /> },
+        ],
+      },
     ],
   },
 ]);

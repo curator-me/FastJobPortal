@@ -1,0 +1,122 @@
+.signing-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-secondary);
+  padding: var(--space-2xl) var(--space-md);
+}
+
+.signing-card {
+  background: var(--white);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 600px;
+}
+
+.signing-title {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+  text-align: center;
+  font-weight: 700;
+}
+
+.signing-subtitle {
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  font-size: 1rem;
+}
+
+.signing-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.input-field,
+.select-field,
+.textarea-field {
+  padding: 0.75rem var(--space-md);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: var(--font-primary);
+  transition: all 0.2s ease;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  width: 100%;
+}
+
+.input-field:focus,
+.select-field:focus,
+.textarea-field:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.textarea-field {
+  resize: vertical;
+}
+
+.submit-button {
+  margin-top: var(--space-md);
+  padding: 0.875rem;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+.signing-footer {
+  margin-top: var(--space-lg);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.signing-footer a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signing-footer a:hover {
+  text-decoration: underline;
+}
