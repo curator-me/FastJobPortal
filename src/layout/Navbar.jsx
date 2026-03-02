@@ -72,6 +72,12 @@ export function Navbar() {
             Pricing
           </NavLink>
 
+          {user && (
+            <NavLink to="/dashboard/saved-jobs" className="link">
+              Saved Jobs
+            </NavLink>
+          )}
+
           {user ? (
             <div className="profile-dropdown" ref={dropdownRef}>
               <div
@@ -85,14 +91,14 @@ export function Navbar() {
                     <User size={20} />
                   </div>
                 )}
-                <span className="user-name">{user.name.split(' ')[0]}</span>
+                <span className="user-name">{(user.firstName || "").split(' ')[0]}</span>
                 <ChevronDown size={14} className={`chevron ${isDropdownOpen ? 'open' : ''}`} />
               </div>
 
               {isDropdownOpen && (
                 <div className="dropdown-menu">
                   <div className="dropdown-header">
-                    <p className="full-name">{user.name}</p>
+                    <p className="full-name">{user.firstName} {user.lastName}</p>
                     <p className="email">{user.email}</p>
                   </div>
                   <hr />

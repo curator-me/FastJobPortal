@@ -1,35 +1,34 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { MainContent } from "../BrowseJobs/MainContent";
 
 export function About() {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const [userInfo, setUserInfo] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (user?.id) {
-            // Simulating a GET request to fetch user info
+        if (user?.id && token) {
             setLoading(true);
-            setTimeout(() => {
-                // This simulates the response from a GET /api/users/{id}
-                const mockData = {
-                    fullName: user.name,
-                    email: user.email,
-                    role: user.role,
-                    phone: "+1 (555) 123-4567",
-                    address: "123 Tech Lane, Silicon Valley, CA",
-                    bio: "Passionate software developer with 5 years of experience in React and Node.js. Looking for opportunities to build innovative products.",
-                    skills: ["React", "JavaScript", "CSS", "Node.js", "Express"],
-                    experience: "5 Years",
-                    education: "B.S. in Computer Science"
-                };
-                setUserInfo(mockData);
-                setLoading(false);
-            }, 800);
+            fetch(`http://localhost:3001/api/users/${user.id}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setUserInfo(data);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.error(err);
+                    setLoading(false);
+                });
         }
-    }, [user?.id]);
+    }, [user?.id, token]);
 
     if (loading) return <div className="loading">Loading profile info...</div>;
+    if (!userInfo) return <div>Error loading user info</div>;
 
     return (
         <div className="about-section">
@@ -38,7 +37,7 @@ export function About() {
                 <div className="info-grid">
                     <div className="info-item">
                         <span className="label">Full Name:</span>
-                        <span className="value">{userInfo.fullName}</span>
+                        <span className="value">{userInfo.firstName} {userInfo.lastName}</span>
                     </div>
                     <div className="info-item">
                         <span className="label">Email:</span>
@@ -46,33 +45,19 @@ export function About() {
                     </div>
                     <div className="info-item">
                         <span className="label">Phone:</span>
-                        <span className="value">{userInfo.phone}</span>
+                        <span className="value">{userInfo.phoneNumber || "N/A"}</span>
                     </div>
                     <div className="info-item">
                         <span className="label">Address:</span>
-                        <span className="value">{userInfo.address}</span>
+                        <span className="value">{userInfo.Address || "N/A"}</span>
                     </div>
                     <div className="info-item">
-                        <span className="label">Role:</span>
-                        <span className="value">{userInfo.role}</span>
+                        <span className="label">Account Type:</span>
+                        <span className="value">{userInfo.AccountType}</span>
                     </div>
                     <div className="info-item">
-                        <span className="label">Experience:</span>
-                        <span className="value">{userInfo.experience}</span>
-                    </div>
-                </div>
-
-                <div className="bio-section">
-                    <h3>Biography</h3>
-                    <p>{userInfo.bio}</p>
-                </div>
-
-                <div className="skills-section">
-                    <h3>Skills</h3>
-                    <div className="skills-tags">
-                        {userInfo.skills.map((skill, index) => (
-                            <span key={index} className="skill-tag">{skill}</span>
-                        ))}
+                        <span className="label">Employment Status:</span>
+                        <span className="value">{userInfo.employmentStatus}</span>
                     </div>
                 </div>
             </div>
@@ -80,14 +65,72 @@ export function About() {
     );
 }
 
-export const SavedJobs = () => (
-    <div className="dashboard-section">
-        <h2>Saved Jobs</h2>
-        <div className="empty-state">
-            <p>You haven't saved any jobs yet. Browse jobs to add them to your list.</p>
+export const SavedJobs = () => {
+    const { user, token, login } = useAuth();
+    const [savedJobs, setSavedJobs] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (user?.id && token) {
+            setLoading(true);
+            fetch(`http://localhost:3001/api/users/${user.id}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setSavedJobs(data.savedJobs || []);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.error(err);
+                    setLoading(false);
+                });
+        }
+    }, [user?.id, token]);
+
+    const handleUnsaveJob = async (jobId) => {
+        try {
+            const response = await fetch("http://localhost:3001/api/users/unsave-job", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ jobId })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setSavedJobs(prev => prev.filter(job => (job._id || job.id) !== jobId));
+                // Update user in context
+                const updatedUser = { ...user, savedJobs: data.savedJobs };
+                login(updatedUser, token);
+            }
+        } catch (error) {
+            console.error("Error unsaving job:", error);
+        }
+    };
+
+    if (loading) return <div className="loading">Loading saved jobs...</div>;
+
+    return (
+        <div className="dashboard-section">
+            <h2>Saved Jobs</h2>
+            {savedJobs.length === 0 ? (
+                <div className="empty-state">
+                    <p>You haven't saved any jobs yet. Browse jobs to add them to your list.</p>
+                </div>
+            ) : (
+                <MainContent
+                    jobs={savedJobs}
+                    onUnsaveJob={handleUnsaveJob}
+                    onSaveJob={() => { }} // Won't be needed here as they are already saved
+                />
+            )}
         </div>
-    </div>
-);
+    );
+};
 
 export const AppliedJobs = () => (
     <div className="dashboard-section">

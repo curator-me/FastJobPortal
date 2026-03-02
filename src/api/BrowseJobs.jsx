@@ -30,3 +30,34 @@ export const handleEnvironmentToggle = (environment, setFilterOptions) => {
       : [...prev.environment, environment], // add
   }));
 };
+
+export const fetchJobs = async (filters = {}) => {
+  try {
+    const queryParams = new URLSearchParams();
+
+    if (filters.location) queryParams.append("location", filters.location);
+    if (filters.experience?.length > 0) {
+      filters.experience.forEach(exp => queryParams.append("experience", exp));
+    }
+    if (filters.tags?.length > 0) {
+      filters.tags.forEach(tag => queryParams.append("tags", tag));
+    }
+    if (filters.employmentType?.length > 0) {
+      filters.employmentType.forEach(type => queryParams.append("employmentType", type));
+    }
+    if (filters.environment?.length > 0) {
+      filters.environment.forEach(env => queryParams.append("environment", env));
+    }
+    if (filters.salaryRange?.min) queryParams.append("minSalary", filters.salaryRange.min);
+    if (filters.salaryRange?.max && filters.salaryRange.max !== Infinity) {
+      queryParams.append("maxSalary", filters.salaryRange.max);
+    }
+
+    const response = await fetch(`http://localhost:3001/api/jobs?${queryParams.toString()}`);
+    if (!response.ok) throw new Error("Failed to fetch jobs");
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
+    return [];
+  }
+};

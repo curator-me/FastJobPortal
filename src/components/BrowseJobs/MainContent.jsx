@@ -1,8 +1,11 @@
 import { MapPin } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-export function MainContent({ jobs = [] }) {
+export function MainContent({ jobs = [], onSaveJob, onUnsaveJob }) {
+  const { user } = useAuth();
+
   return (
     <main className="main-content">
       <div className="content-header">
@@ -25,18 +28,16 @@ export function MainContent({ jobs = [] }) {
         </div>
       ) : (
         <div className="job-list">
-          {/* Job Card list start here */}
           {jobs.map((job) => (
             <motion.div
               className="job-card-wrapper"
-              key={job.id}
+              key={job._id || job.id}
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: job.id * 0.1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
               viewport={{ once: true }}
             >
               <div className="job-card">
-                {/* Job Header with Status Badge */}
                 <div className="job-header">
                   <div className="job-title-section">
                     <h3 className="job-position">{job.position}</h3>
@@ -45,31 +46,32 @@ export function MainContent({ jobs = [] }) {
                     </div>
                   </div>
                   <div className="job-actions">
-                    <button className="save-btn" aria-label="Save job">
+                    <button className="save-btn" aria-label="Share job">
                       <span className="save-icon">Share</span>
                     </button>
-                    <button className="save-btn" aria-label="Save job">
-                      <span className="save-icon">Save</span>
-                    </button>
+                    {user && (
+                      <button
+                        className={`save-btn ${user.savedJobs?.includes(job._id) ? "saved" : ""}`}
+                        onClick={() => user.savedJobs?.includes(job._id) ? onUnsaveJob(job._id) : onSaveJob(job._id)}
+                        aria-label="Save job"
+                      >
+                        <span className="save-icon">
+                          {user.savedJobs?.includes(job._id) ? "Saved" : "Save"}
+                        </span>
+                      </button>
+                    )}
                   </div>
                 </div>
 
-                {/* Job Location */}
-                {/* {job.workMode !== "Remote" && ( */}
                 <div className="job-location-section">
                   <span className="location-icon">
-                    {/* <CiLocationOn /> */}
                     <MapPin />
                   </span>
                   <span className="location-text">{job.location}</span>
                 </div>
-                {/* )} */}
 
-                {/* Job Metadata */}
                 <div className="job-metadata">
-                  <span
-                    className={`work-mode-badge ${job.workMode.toLowerCase()}`}
-                  >
+                  <span className={`work-mode-badge ${job.workMode.toLowerCase()}`}>
                     {job.workMode}
                   </span>
                   <span className="employment-type">{job.employmentType}</span>
@@ -78,7 +80,6 @@ export function MainContent({ jobs = [] }) {
                   </span>
                 </div>
 
-                {/* Job Description */}
                 <p className="job-description">
                   {job.description.length > 150
                     ? `${job.description.substring(0, 150)}...`
@@ -88,7 +89,6 @@ export function MainContent({ jobs = [] }) {
                   )}
                 </p>
 
-                {/* Job Tags/Skills */}
                 <div className="job-skills">
                   <span className="skills-label">Skills:</span>
                   <div className="skills-list">
@@ -100,7 +100,6 @@ export function MainContent({ jobs = [] }) {
                   </div>
                 </div>
 
-                {/* Job Footer with Salary and Actions */}
                 <div className="job-footer">
                   <div className="salary-info">
                     <span className="salary-label">Salary Range:</span>
@@ -113,9 +112,9 @@ export function MainContent({ jobs = [] }) {
                   <div className="footer-actions">
                     <span className="deadline">
                       <span className="deadline-label">Apply by:</span>
-                      <span className="deadline-date">{job.deadline}</span>
+                      <span className="deadline-date">{new Date(job.deadline).toLocaleDateString()}</span>
                     </span>
-                    <Link to={`/jobs/${job.id}`}>
+                    <Link to={`/jobs/${job._id || job.id}`}>
                       <button className="apply-btn">
                         Apply Now
                         <span className="apply-arrow">→</span>
