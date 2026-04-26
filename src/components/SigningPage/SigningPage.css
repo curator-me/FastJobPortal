@@ -3,120 +3,230 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-secondary);
+  background: var(--color-d);
   padding: var(--space-2xl) var(--space-md);
+  position: relative;
+  overflow: hidden;
 }
 
-.signing-card {
+/* Background elements for premium look */
+.signing-page::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: -100px;
+  right: -100px;
+}
+
+.signing-page::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  bottom: -50px;
+  left: -50px;
+}
+
+.signing-page .modal-overlay {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - 70px);
+  background: rgba(0, 0, 0, 0.4);
+  /* backdrop-filter: blur(8px); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-md);
+}
+
+.signing-page .signing-card {
   background: var(--white);
   padding: var(--space-2xl);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-.signing-title {
-  font-size: 2rem;
+.signin-page .close-button {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.signing-page .close-button:hover {
   color: var(--text-primary);
+} 
+
+.signing-page .signing-title {
+  font-size: 1.75rem;
+  color: var(--color-a);
   margin-bottom: var(--space-xs);
   text-align: center;
   font-weight: 700;
 }
 
-.signing-subtitle {
+.signing-page .signing-subtitle {
   color: var(--text-muted);
   text-align: center;
   margin-bottom: var(--space-xl);
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
-.signing-form {
+.signing-page .signing-form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
-.form-row {
+.signing-page .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-md);
 }
 
 @media (max-width: 480px) {
-  .form-row {
+  .signing-page .form-row {
     grid-template-columns: 1fr;
   }
 }
 
-.form-group {
+.signing-page .form-group {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
 }
 
-.form-group label {
+.signing-page .form-group label {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
 }
 
-.input-field,
-.select-field,
-.textarea-field {
+.signing-page .input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.signing-page .input-icon {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  color: var(--text-muted);
+}
+
+.signing-page .input-field,
+.signing-page .select-field,
+.signing-page .textarea-field {
   padding: 0.75rem var(--space-md);
-  border: 1px solid var(--input-border);
+  border: 1.5px solid var(--gray-200);
   border-radius: var(--radius-md);
   font-size: 1rem;
   font-family: var(--font-primary);
   transition: all 0.2s ease;
-  background-color: var(--input-bg);
-  color: var(--input-text);
+  background-color: var(--gray-50);
+  color: var(--text-primary);
   width: 100%;
+  padding-left: 40px;
 }
 
-.input-field:focus,
-.select-field:focus,
-.textarea-field:focus {
+.signing-page .input-field:focus,
+.signing-page .select-field:focus,
+.signing-page .textarea-field:focus {
   outline: none;
-  border-color: var(--input-focus-border);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: var(--color-a);
+  background-color: var(--white);
+  box-shadow: 0 0 0 4px rgba(37, 202, 235, 0.1);
 }
 
-.textarea-field {
+.signing-page .textarea-field {
   resize: vertical;
+  min-height: 80px;
 }
 
-.submit-button {
-  margin-top: var(--space-md);
+.signing-page .submit-button {
+  margin-top: var(--space-sm);
   padding: 0.875rem;
-  background-color: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
+  background: linear-gradient(135deg, var(--color-d) 0%, var(--color-c) 100%);
+  color: var(--white);
   border: none;
   border-radius: var(--radius-md);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
 }
 
-.submit-button:hover {
-  background-color: var(--btn-primary-hover);
+.signing-page .submit-button:hover {
+  background: linear-gradient(135deg, var(--color-a) 0%, var(--color-b) 100%);
+  transform: translateY(-0.5px);
+  box-shadow: var(--shadow-md);
 }
 
-.signing-footer {
-  margin-top: var(--space-lg);
+.signing-page .submit-button:active {
+  transform: translateY(0);
+}
+
+.signing-page .signing-footer {
+  margin-top: var(--space-xl);
   text-align: center;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
 }
 
-.signing-footer a {
-  color: var(--primary-blue);
-  text-decoration: none;
-  font-weight: 600;
+.signing-page .switch-button {
+  color: var(--color-b);
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 4px;
 }
 
-.signing-footer a:hover {
+.signing-page .switch-button:hover {
   text-decoration: underline;
 }
+
+/* Custom scrollbar for the modal */
+.signing-page .signing-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.signing-page .signing-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.signing-page .signing-card::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 10px;
+}
+
+.signing-page .signing-card::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+

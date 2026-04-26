@@ -52,28 +52,34 @@ export function Navbar() {
     >
       <div className="container">
         <div className="nav-links">
-          <NavLink to="/" className="link" end>
+          <NavLink to="/" className={({ isActive }) =>
+            isActive ? "link active" : "link"} end>
             Home
           </NavLink>
 
-          <NavLink to="/jobs" className="link">
+          <NavLink to="/jobs" className={({ isActive }) =>
+            isActive ? "link active" : "link"}>
             Browse Jobs
           </NavLink>
 
-          <NavLink to="/post-job" className="link">
+          <NavLink to="/post-job" className={({ isActive }) =>
+            isActive ? "link active" : "link"}>
             Post A Job
           </NavLink>
 
-          <NavLink to="/companies" className="link">
+          <NavLink to="/companies" className={({ isActive }) =>
+            isActive ? "link active" : "link"}>
             Companies
           </NavLink>
 
-          <NavLink to="/pricing" className="link">
+          <NavLink to="/pricing" className={({ isActive }) =>
+            isActive ? "link active" : "link"}>
             Pricing
           </NavLink>
 
           {user && (
-            <NavLink to="/dashboard/saved-jobs" className="link">
+            <NavLink to="/dashboard/saved-jobs" className={({ isActive }) =>
+              isActive ? "link active" : "link"}>
               Saved Jobs
             </NavLink>
           )}
@@ -114,7 +120,7 @@ export function Navbar() {
               )}
             </div>
           ) : (
-            <NavLink to="/signin" className="link">
+            <NavLink to="/signin" className={`link`}>
               Sign In
             </NavLink>
           )}
